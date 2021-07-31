@@ -4,7 +4,18 @@ public class Venda extends Transacao{
         super(dataVenda, produto, qtdeVendida);
     }
 
-    public void vender(Produto produto, int qtdeVendida){
+    public boolean vender(Produto produto, int qtdeVendida){
+        if(produto.verificarEstoqueInsuficiente(qtdeVendida)){
+            System.out.println("Estoque Insuficiente !");
+            return false;
+        }
+        else{
+            produto.debitarEstoque(qtdeVendida);
+            System.out.println(produto.calcularValorVenda(qtdeVendida));
 
+            if(produto.verificarEstoqueBaixo())
+                System.out.println("Estoque baixo !");
+            return true;
+        }
     }
 }

@@ -7,7 +7,14 @@ public class Compra extends Transacao {
         super(dataCompra, produto, qtdeCompra);
     }
 
-    public void comprar(Produto produto, int qtdeCompra){
-
+    public boolean comprar(Produto produto, int qtdeCompra){
+        if(produto.verificarEstoqueExcedente(qtdeCompra)){
+            System.out.print("Compra efetuada !");
+            return false;
+        }
+        else{
+            produto.creditarEstoque(qtdeCompra);
+            return true;
+        }
     }
 }
