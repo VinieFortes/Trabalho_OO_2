@@ -21,28 +21,48 @@ public class Produto {
 
     }
 
-    public void debitarEstoque(int quantidade){
-
+    public void debitarEstoque(int quantidade) {
+        if(!verificarEstoqueInsuficiente(quantidade)){
+            this.qtdeEstoque -= quantidade;
+        }
     }
 
     public void creditarEstoque(int quantidade){
-
+        if(quantidade < 0) {
+            throw new IllegalArgumentException("Quantidade inferior a zero !");
+        }
+        else {
+            this.qtdeEstoque += quantidade;
+        }
     }
 
-    public void verificarEstoqueBaixo(){
-
+    public boolean verificarEstoqueBaixo(){
+        return (qtdeEstoque < estoqueMinimo);
     }
 
-    public void verificarEstoqueInsuficiente(int quantidade){
-
+    public boolean verificarEstoqueInsuficiente(int quantidade){
+        if(quantidade < 0) {
+            throw new IllegalArgumentException("Quantidade inferior a zero !");
+        }
+        else {
+            return (qtdeEstoque < quantidade);
+        }
     }
 
-    public void verificarEstoqueExcedente(int quantidade){
-
+    public boolean verificarEstoqueExcedente(int quantidade){
+        if(quantidade < 0) {
+            throw new IllegalArgumentException("Quantidade inferior a zero !");
+        }
+        else {
+            return (qtdeEstoque > quantidade);
+        }
     }
 
-    public void calcularValorVenda(int quantidade){
-
+    public float calcularValorVenda(int quantidade){
+        if(quantidade < 0) {
+            throw new IllegalArgumentException("Quantidade inferior a zero !");
+        }
+        return precoUnit * quantidade;
     }
 
     public void vender(String dataVenda, Cliente cliente, int qtdeVendida){
