@@ -4,5 +4,6 @@ public class Fornecedor extends Pessoa{
 
     Fornecedor(String nome, String cnpj){
         super(nome);
+        this.cnpj = cnpj;
     }
 }

@@ -1,9 +1,10 @@
 public class Cliente extends Pessoa {
 
-    private int cpf;
+    private String cpf;
 
-    Cliente(String nome, int cpf){
+    Cliente(String nome, String cpf){
         super(nome);
-    }
+        this.cpf = cpf;
 
+    }
 }
