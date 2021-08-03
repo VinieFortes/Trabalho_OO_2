@@ -5,13 +5,21 @@ public class Compra extends Transacao {
 
     Compra(String dataCompra, Produto produto, Fornecedor fornecedor, int qtdeCompra, float precoUnit) {
         super(dataCompra, produto, qtdeCompra);
-        this.fornecedor = fornecedor;
-        this.precoUnit = precoUnit;
+        if(fornecedor == null) {
+            throw new NullPointerException("Forncedor esta nulo !");
+        } else {
+            this.fornecedor = fornecedor;
+        }
+        if(precoUnit <= 0) {
+            throw new IllegalArgumentException("Preço unitario inferior a zero !");
+        }
+        else if(precoUnit > 0) {
+            this.precoUnit = precoUnit;
+        }
     }
 
     public boolean comprar(Produto produto, int qtdeCompra){
         if(produto.verificarEstoqueExcedente(qtdeCompra)){
-            System.out.print("Compra efetuada !");
             return false;
         }
         else{

@@ -3,16 +3,19 @@ public class Venda extends Transacao{
 
     Venda(String dataVenda, Cliente cliente, Produto produto, int qtdeVendida) {
         super(dataVenda, produto, qtdeVendida);
-        this.cliente = cliente;
+        if(cliente == null) {
+            throw new IllegalArgumentException("Cliente esta nulo");
+        }
+        else {
+            this.cliente = cliente;
+        }
     }
 
     public boolean vender(Produto produto, int qtdeVendida){
         if(produto.verificarEstoqueInsuficiente(qtdeVendida)){
-            System.out.println("Estoque Insuficiente !");
             return false;
         }
             produto.debitarEstoque(qtdeVendida);
-            System.out.println(produto.calcularValorVenda(qtdeVendida));
             return true;
     }
 }

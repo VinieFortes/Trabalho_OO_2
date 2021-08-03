@@ -9,31 +9,51 @@ public class Produto {
     private float precoUnit;
     private int estoqueMinimo;
     private int estoqueMaximo;
-    private List<Transacao> historico;
+    private List<String> historico;
 
     Produto(String nome, int qtdeEstoque, float precoUnit, int estoqueMinimo, int estoqueMaximo){
         if(nome == null){
             throw new IllegalArgumentException("O nome do produto esta nulo");
+        }else {
+            this.nome = nome;
         }
-        this.historico = new ArrayList<Transacao>();
-        this.nome = nome;
-        this.qtdeEstoque = qtdeEstoque;
-        this.precoUnit = precoUnit;
-        this.estoqueMinimo = estoqueMinimo;
-        this.estoqueMaximo = estoqueMaximo;
+        if(qtdeEstoque < 0) {
+            throw new IllegalArgumentException("Estoque inferior a zero");
+        }
+        else {
+            this.qtdeEstoque = qtdeEstoque;
+        }
+        if(precoUnit <= 0) {
+            throw new IllegalArgumentException("Preço inferior a zero");
+        }
+        else {
+            this.precoUnit = precoUnit;
+        }
+        if(estoqueMinimo < 0)
+            throw new IllegalArgumentException("Estoque minimo inferior a zero");
+        else {
+            this.estoqueMinimo = estoqueMinimo;
+        }
+        if (estoqueMaximo < estoqueMinimo){
+            throw new IllegalArgumentException("Estoque maximo inferior ao estoque minimo");
+        } else {
+            this.estoqueMaximo = estoqueMaximo;
+        }
+        this.historico = new ArrayList<String>();
     }
 
     public void registrarHistorico(Transacao transacao){
-        if(transacao == null){
-            throw new NullPointerException("A transação esta nula !");
+        if (historico == null) {
+            throw new NullPointerException("Transacao nula");
         }
-        historico.add(transacao);
+        this.historico.add(transacao.getProduto().nome + ", " + transacao.getDataTransacao() + ", " + transacao.getQtde());
     }
 
-    public void exibirHistorico(){
-        for (int i = 0; i < historico.size() - 1; i++) {
-            System.out.println(historico.get(i));
+    public List<String> exibirHistorico(){
+        if (historico == null) {
+            throw new NullPointerException("Historico vazio");
         }
+        return this.historico;
     }
 
     public void debitarEstoque(int quantidade) {
