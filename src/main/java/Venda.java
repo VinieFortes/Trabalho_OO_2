@@ -13,9 +13,14 @@ public class Venda extends Transacao{
 
     public boolean vender(Produto produto, int qtdeVendida){
         if(produto.verificarEstoqueInsuficiente(qtdeVendida)){
+            produto.registrarHistorico("Estoque esta insuficiente");
             return false;
         }
+        else {
             produto.debitarEstoque(qtdeVendida);
+        } if (produto.verificarEstoqueBaixo()){
+            produto.registrarHistorico("Estoque esta baixo");
+        }
             return true;
     }
 }

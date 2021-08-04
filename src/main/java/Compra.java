@@ -20,6 +20,7 @@ public class Compra extends Transacao {
 
     public boolean comprar(Produto produto, int qtdeCompra){
         if(produto.verificarEstoqueExcedente(qtdeCompra)){
+            produto.registrarHistorico("Estoque esta excedente");
             return false;
         }
         else{

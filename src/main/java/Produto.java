@@ -42,11 +42,11 @@ public class Produto {
         this.historico = new ArrayList<String>();
     }
 
-    public void registrarHistorico(Transacao transacao){
+    public void registrarHistorico(String transacao){
         if (historico == null) {
             throw new NullPointerException("Transacao nula");
         }
-        this.historico.add(transacao.getProduto().nome + ", " + transacao.getDataTransacao() + ", " + transacao.getQtde());
+        this.historico.add(transacao);
     }
 
     public List<String> exibirHistorico(){
@@ -110,7 +110,7 @@ public class Produto {
         }
         Venda venda = new Venda( dataVenda ,cliente, Produto.this , qtdeVendida);
         if(venda.vender(this, qtdeVendida)){
-            this.registrarHistorico(venda);
+            this.registrarHistorico("Venda" + "\nNome: " +  this.nome + "\nData: " + dataVenda + "\nQuantidade: " + qtdeVendida + "\nPreço Unidade: " + precoUnit);
         }
     }
 
@@ -129,7 +129,7 @@ public class Produto {
         }
         Compra compra = new Compra( dataCompra ,Produto.this, fornecedor, qtdeCompra,precoUnit);
         if(compra.comprar(this, qtdeCompra)){
-            this.registrarHistorico(compra);
+            this.registrarHistorico("Compra" + "\nNome: " +  this.nome + "\nData: " + dataCompra + "\nQuantidade: " + qtdeCompra + "\nPreço Unidade: " + precoUnit);
         }
     }
 }

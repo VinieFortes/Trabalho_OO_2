@@ -61,7 +61,12 @@ class ProdutoTest {
         Fornecedor fornecedor = new Fornecedor("Apple", "00.623.904/0001-73");
         produto.comprar("04/08/21", fornecedor, 100, 12000);
 
-        List<String> registro = List.of("Iphone 12, 04/08/21, 100");
+        List<String> registro = List.of("""
+                Compra
+                Nome: Iphone 12
+                Data: 04/08/21
+                Quantidade: 100
+                Preço Unidade: 12000.0""");
         assertEquals(registro, produto.exibirHistorico());
     }
     @Test
@@ -69,7 +74,12 @@ class ProdutoTest {
         Produto produto = new Produto("Iphone 11", 10, 2, 0, 20);
         Cliente cliente = new Cliente("Marco", "154362598");
         produto.vender("04/08/21", cliente, 10);
-        List<String> registro = List.of("Iphone 11, 04/08/21, 10");
+        List<String> registro = List.of("""
+                Venda
+                Nome: Iphone 11
+                Data: 04/08/21
+                Quantidade: 10
+                Preço Unidade: 2.0""");
         assertEquals(registro, produto.exibirHistorico());
     }
 
@@ -98,7 +108,7 @@ class ProdutoTest {
 
     @Test
     public void deveRetornarCasoEstoqueExcedente() {
-        Produto produto = new Produto("Galaxy Pocket", 10, 2, 12, 20);
+        Produto produto = new Produto("Galaxy Pocket", 50, 2, 12, 20);
         assertTrue(produto.verificarEstoqueExcedente(15));
     }
 }
