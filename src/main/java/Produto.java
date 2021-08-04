@@ -1,3 +1,7 @@
+// Trabalho 2 de OO:
+// Grupo: Vinicius da Silva Fortes &
+// Rodrigo Silva Detoni
+
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
